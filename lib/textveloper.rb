@@ -121,7 +121,14 @@ module Textveloper
     end
 
     def hash_contructor(response)
-      JSON.parse(response)
+      begin
+        JSON.parse(response)
+      rescue Exception => e
+        return {
+          :transaccion => e,
+          :mensaje_transaccion => 'Api don\'t respond'
+          }
+      end
     end
 
     def chunck_message(message)
